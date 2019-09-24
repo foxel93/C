@@ -25,6 +25,7 @@ typedef struct      s_str
     int             accuracy;
     char            mod_length; //hh,h,I,II,L,q,j,z,t
     char            type;       //d,i,o,u,x,X,e,E,f,F,g,G,a,A,c,s,p,n
+    va_list         arg;
     struct s_str    *next;
     struct s_str    *prev;
 }                   t_str;
