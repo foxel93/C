@@ -46,11 +46,13 @@ int		parse_string(const char **str, va_list *args);
 int		spec_signed(va_list *args, const int flags[5]);
 int		spec_unsigned(va_list *args, const int flags[5]);
 int		spec_float(va_list *args, const int flags[5]);
-
-size_t 	ft_int_length(ssize_t num, int flag);
 void	ft_putadr(unsigned long n, int *p);
-void	print_flags(const int flags[5]);
 
+int 	ft_int_length(ssize_t num, const int flags[5]);
+int  ft_int_perc_len(ssize_t num, const int flags[5]);
+
+int ft_uint_length(size_t num, const int flags[5], int base);
+int ft_uint_perc_len(size_t num, const int flags[5], int base);
 
 int 	print_hhd(va_list *args, const int flags[5]);
 int 	print_hd(va_list *args, const int flags[5]);
@@ -64,10 +66,11 @@ int 	print_lu(va_list *args, const int flags[5]);
 int 	print_llu(va_list *args, const int flags[5]);
 int 	print_u(va_list *args, const int flags[5]);
 
-void	ft_putnbr_unsign(long long n, int flag);
-void 	ft_allign_uint(long long output, int flags, int width, int len);
 
-void	ft_putnbr_sign(long long n, int flag);
-void 	ft_allign_int(long long output, int flags, int width, int len);
+void	ft_putnbr_unsign(unsigned long long n, int len, int len2, int base);
+void 	ft_align_uint(unsigned long long output, const int *flags, int width, int len);
+
+void	ft_putnbr_sign(long long n, int len, int len2);
+void 	ft_align_int(long long output, const int *flags, int width, int len);
 
 #endif

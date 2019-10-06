@@ -17,12 +17,18 @@ int 	print_hhu(va_list *args, const int flags[5])
 	int len;
 	unsigned char output;
 	int width;
+    int base;
 
+    base = 10;
+	flags[4] == 'o' ? base = 8 : 0;
+    flags[4] == 'x' ? base = 16 : 0;
+    flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned char)va_arg(*args, void*);
-	len = ft_int_length(output, 0);
-	flags[1] > len ? (width = flags[1]) : (width = len);
-	ft_allign_uint(output, flags[0], width, len);
-	return (0);
+    len = ft_uint_length(output, flags, base);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+    ft_align_uint(output, flags, width, len);
+	return (1);
 }
 
 int 	print_hu(va_list *args, const int flags[5])
@@ -30,12 +36,18 @@ int 	print_hu(va_list *args, const int flags[5])
 	int len;
 	unsigned short output;
 	int width;
+    int base;
 
+    base = 10;
+    flags[4] == 'o' ? base = 8 : 0;
+    flags[4] == 'x' ? base = 16 : 0;
+    flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned short)va_arg(*args, void*);
-	len = ft_int_length(output, 0);
-	flags[1] > len ? (width = flags[1]) : (width = len);
-	ft_allign_uint(output, flags[0], width, len);
-	return (0);
+    len = ft_uint_length(output, flags, base);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+    ft_align_uint(output, flags, width, len);
+	return (1);
 }
 
 int 	print_lu(va_list *args, const int flags[5])
@@ -43,12 +55,18 @@ int 	print_lu(va_list *args, const int flags[5])
 	int len;
 	unsigned long output;
 	int width;
+    int base;
 
+    base = 10;
+    flags[4] == 'o' ? base = 8 : 0;
+    flags[4] == 'x' ? base = 16 : 0;
+    flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned long)va_arg(*args, void*);
-	len = ft_int_length(output, 0);
-	flags[1] > len ? (width = flags[1]) : (width = len);
-	ft_allign_uint(output, flags[0], width, len);
-	return (0);
+    len = ft_uint_length(output, flags, base);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+    ft_align_uint(output, flags, width, len);
+	return (1);
 }
 
 int 	print_llu(va_list *args, const int flags[5])
@@ -56,12 +74,18 @@ int 	print_llu(va_list *args, const int flags[5])
 	int len;
 	unsigned long long output;
 	int width;
+    int base;
 
+    base = 10;
+    flags[4] == 'o' ? base = 8 : 0;
+    flags[4] == 'x' ? base = 16 : 0;
+    flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned long long)va_arg(*args, void*);
-	len = ft_int_length(output, 0);
-	flags[1] > len ? (width = flags[1]) : (width = len);
-	ft_allign_uint(output, flags[0], width, len);
-	return (0);
+    len = ft_uint_length(output, flags, base);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+    ft_align_uint(output, flags, width, len);
+	return (1);
 }
 
 int 	print_u(va_list *args, const int flags[5])
@@ -69,10 +93,16 @@ int 	print_u(va_list *args, const int flags[5])
 	int len;
 	unsigned int output;
 	int width;
+    int base;
 
+    base = 10;
+    flags[4] == 'o' ? base = 8 : 0;
+    flags[4] == 'x' ? base = 16 : 0;
+    flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned int)va_arg(*args, void*);
-	len = ft_int_length(output, 0);
-	flags[1] > len ? (width = flags[1]) : (width = len);
-	ft_allign_uint(output, flags[0], width, len);
-	return (0);
+    len = ft_uint_length(output, flags, base);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+    ft_align_uint(output, flags, width, len);
+	return (1);
 }

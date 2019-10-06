@@ -56,3 +56,27 @@ int			spec_per(void)
 	ft_putchar('%');
 	return (1);
 }
+
+void		ft_putadr(unsigned long n, int *p)
+{
+    if (n > 15)
+    {
+        ft_putadr((n / 16), p);
+        ft_putadr((n % 16), p);
+    }
+    else if (n < 10)
+    {
+        (*p)++;
+        ft_putchar((char)(n + '0'));
+    }
+    else
+    {
+        (*p)++;
+        n == 10 ? ft_putchar('a') : 0;
+        n == 11 ? ft_putchar('b') : 0;
+        n == 12 ? ft_putchar('c') : 0;
+        n == 13 ? ft_putchar('d') : 0;
+        n == 14 ? ft_putchar('e') : 0;
+        n == 15 ? ft_putchar('f') : 0;
+    }
+}
