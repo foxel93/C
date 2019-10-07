@@ -17,7 +17,8 @@ int		main(void)
 	int c;
 
 	c = INT_MIN;
-	ft_printf("Hello %#010.20lld\n\n",123145433);
+	//ft_printf("%0.9f\n",-1.7);
+    printf("%010.5F bleat\n",0.0/0.0);
     //printf("%-+15.5hhd\n",100);
 	return (0);
 }

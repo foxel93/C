@@ -2,7 +2,7 @@
 
 int ft_int_length(ssize_t num, const int flags[5])
 {
-	size_t len;
+	int len;
 
 	len = 0;
 	if (num < 0 || (flags[0] & F_P) == F_P || (flags[0] & F_S) == F_S)
@@ -19,7 +19,7 @@ int ft_int_length(ssize_t num, const int flags[5])
 
 int ft_uint_length(size_t num, const int flags[5], int base)
 {
-    size_t len;
+    int len;
 
     len = 0;
     base == 32 ? base = 16 : 0;

@@ -23,11 +23,11 @@ int		parse_string(const char **str, va_list *args)
 	((flags[4] = parse_specificators(str)) != 0) ? (*str)++ : 0;
 	if (flags[4] == 'd')
 		return (spec_signed(args, flags));
-	else if (flags[4] == 'u' || flags[4] == 'o'|| ft_tolower(flags[4]) == 'X')
+	else if (flags[4] == 'u' || flags[4] == 'o'|| ft_tolower(flags[4]) == 'x')
 		return (spec_unsigned(args, flags));
-	else if (ft_tolower(flags[4]) == 'F' || ft_tolower(flags[4]) == 'E' ||
-            ft_tolower(flags[4]) == 'G' || ft_tolower(flags[4]) == 'A')
-		return (spec_float(args, flags));
+	else if (ft_tolower(flags[4]) == 'f' || ft_tolower(flags[4]) == 'e' ||
+            ft_tolower(flags[4]) == 'g' || ft_tolower(flags[4]) == 'a')
+		return (spec_double(args, flags));
 	else if (flags[4] == 'c')
 		return (spec_char(args, flags));
 	else if (flags[4] == 's')

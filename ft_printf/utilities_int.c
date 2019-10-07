@@ -34,3 +34,46 @@ void	ft_putnbr_sign(long long n, int len, int len2)
 	else
 		ft_putchar(n + '0');
 }
+
+void printBits(size_t const size, void const * const ptr, char sep)
+{
+    unsigned char *b;
+    unsigned char byte;
+    int i;
+    int j;
+
+    b = (unsigned char*) ptr;
+    i = (int)size;
+    while (--i >= 0)
+    {
+        j = 8;
+        while (--j >= 0)
+        {
+            byte = (b[i] >> j) & 1;
+            ft_putchar((char)(byte + '0'));
+        }
+        i != 0 ? ft_putchar(sep) : 0;
+    }
+}
+
+long long	ft_pow(long long n, long pow)
+{
+    if (pow < 0)
+        return (1);
+    return (n * ft_pow(n, pow - 1));
+}
+
+int     ft_count(long long a)
+{
+    int count;
+
+    count = 0;
+    if (a == 0)
+        return (1);
+    while (a != 0)
+    {
+        count++;
+        a /= 10;
+    }
+    return (count);
+}

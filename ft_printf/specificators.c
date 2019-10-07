@@ -28,9 +28,9 @@ int		spec_signed(va_list *args, const int flags[5])
 		printf("zd - size_t");
 	else if (flags[3] == 't')
 		printf("td - ptrdiff_t");
-	else
+	else if (flags[3] == 0)
 		return (print_d(args, flags));
-	return (1);
+	return (0);
 }
 
 int		spec_unsigned(va_list *args, const int flags[5])
@@ -49,16 +49,20 @@ int		spec_unsigned(va_list *args, const int flags[5])
 		printf("zd - size_t");
 	else if (flags[3] == 't')
 		printf("td - ptrdiff_t");
-	else
+	else if (flags[3] == 0)
 		return (print_u(args, flags));
-	return (1);
+	return (0);
 }
 
-int		spec_float(va_list *args, const int flags[5])
+int		spec_double(va_list *args, const int *flags)
 {
 	if (flags[3] == 'L')
 	{
-		ft_putstr("Here code");
+
 	}
-	return (1);
+	else if (flags[3] == 0)
+    {
+        print_double(args, flags);
+    }
+	return (0);
 }
