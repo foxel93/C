@@ -24,6 +24,10 @@ int 	print_hhu(va_list *args, const int flags[5])
     flags[4] == 'x' ? base = 16 : 0;
     flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned char)va_arg(*args, void*);
+    flags[4] == 'b' ? ft_putstr("0b") : 0;
+    flags[4] == 'B' ? ft_putstr("0B") : 0;
+    if (flags[4] == 'b' || flags[4] == 'B')
+        return (printBits(sizeof(output), &output, 0));
     len = ft_uint_length(output, flags, base);
     flags[1] > len ? (width = flags[1]) : (width = len);
     flags[2] > width ? (width = flags[2]) : 0;
@@ -43,6 +47,10 @@ int 	print_hu(va_list *args, const int flags[5])
     flags[4] == 'x' ? base = 16 : 0;
     flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned short)va_arg(*args, void*);
+    flags[4] == 'b' ? ft_putstr("0b") : 0;
+    flags[4] == 'B' ? ft_putstr("0B") : 0;
+    if (flags[4] == 'b' || flags[4] == 'B')
+        return (printBits(sizeof(output), &output, 0));
     len = ft_uint_length(output, flags, base);
     flags[1] > len ? (width = flags[1]) : (width = len);
     flags[2] > width ? (width = flags[2]) : 0;
@@ -62,6 +70,10 @@ int 	print_lu(va_list *args, const int flags[5])
     flags[4] == 'x' ? base = 16 : 0;
     flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned long)va_arg(*args, void*);
+    flags[4] == 'b' ? ft_putstr("0b") : 0;
+    flags[4] == 'B' ? ft_putstr("0B") : 0;
+    if (flags[4] == 'b' || flags[4] == 'B')
+        return (printBits(sizeof(output), &output, 0));
     len = ft_uint_length(output, flags, base);
     flags[1] > len ? (width = flags[1]) : (width = len);
     flags[2] > width ? (width = flags[2]) : 0;
@@ -81,6 +93,10 @@ int 	print_llu(va_list *args, const int flags[5])
     flags[4] == 'x' ? base = 16 : 0;
     flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned long long)va_arg(*args, void*);
+	flags[4] == 'b' ? ft_putstr("0b") : 0;
+    flags[4] == 'B' ? ft_putstr("0B") : 0;
+    if (flags[4] == 'b' || flags[4] == 'B')
+        return (printBits(sizeof(output), &output, 0));
     len = ft_uint_length(output, flags, base);
     flags[1] > len ? (width = flags[1]) : (width = len);
     flags[2] > width ? (width = flags[2]) : 0;
@@ -100,6 +116,10 @@ int 	print_u(va_list *args, const int flags[5])
     flags[4] == 'x' ? base = 16 : 0;
     flags[4] == 'X' ? base = 32 : 0;
 	output = (unsigned int)va_arg(*args, void*);
+    flags[4] == 'b' ? ft_putstr("0b") : 0;
+    flags[4] == 'B' ? ft_putstr("0B") : 0;
+    if (flags[4] == 'b' || flags[4] == 'B')
+        return (printBits(sizeof(output), &output, 0));
     len = ft_uint_length(output, flags, base);
     flags[1] > len ? (width = flags[1]) : (width = len);
     flags[2] > width ? (width = flags[2]) : 0;

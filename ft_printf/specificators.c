@@ -22,12 +22,8 @@ int		spec_signed(va_list *args, const int flags[5])
 		return (print_hd(args, flags));
 	else if (flags[3] == 'l')
 		return (print_ld(args, flags));
-	else if (flags[3] == 'j')
-		printf("jd- intmax_t");
 	else if (flags[3] == 'z')
-		printf("zd - size_t");
-	else if (flags[3] == 't')
-		printf("td - ptrdiff_t");
+        return (print_z(args, flags));
 	else if (flags[3] == 0)
 		return (print_d(args, flags));
 	return (0);
@@ -43,12 +39,8 @@ int		spec_unsigned(va_list *args, const int flags[5])
 		return (print_hu(args, flags));
 	else if (flags[3] == 'l')
 		return (print_lu(args, flags));
-	else if (flags[3] == 'j')
-		printf("jd- intmax_t");
 	else if (flags[3] == 'z')
-		printf("zd - size_t");
-	else if (flags[3] == 't')
-		printf("td - ptrdiff_t");
+        return (print_zu(args, flags));
 	else if (flags[3] == 0)
 		return (print_u(args, flags));
 	return (0);
@@ -56,13 +48,13 @@ int		spec_unsigned(va_list *args, const int flags[5])
 
 int		spec_double(va_list *args, const int *flags)
 {
-	if (flags[3] == 'L')
+	if (flags[3] == 'L' || flags[3] == 'l')
 	{
-
+        return (print_ldouble(args, flags));
 	}
 	else if (flags[3] == 0)
     {
-        print_double(args, flags);
+        return (print_double(args, flags));
     }
 	return (0);
 }

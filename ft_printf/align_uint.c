@@ -46,7 +46,7 @@ void    ft_align_uint_right(unsigned long long output, const int *flags, int wid
     len2 = ft_uint_perc_len(output, flags, base);
     len > len2 ? width -= len : (width -= len2);
 
-    if ((flags[0] & F_Z) == F_Z)
+    if (((flags[0] & F_Z) == F_Z && flags[2] < -1))
         ft_print_flag(flags);
     while (width > 0) {
         if (flags[2] > -2)
@@ -57,7 +57,7 @@ void    ft_align_uint_right(unsigned long long output, const int *flags, int wid
             ft_putchar(' ');
         width--;
     }
-    if ((flags[0] & F_Z) != F_Z)
+    if (((flags[0] & F_Z) == F_Z && flags[2] >= -1) || (flags[0] & F_Z) != F_Z)
         ft_print_flag(flags);
     ft_putnbr_unsign(output, len, len2, base);
 }

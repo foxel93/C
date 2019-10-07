@@ -14,40 +14,39 @@
 
 int			spec_char(va_list *args, const int flags[5])
 {
-	char	output;
+	unsigned char	output;
 
-	output = (char)va_arg(*args, int);
-	ft_putchar(output);
+	output = (unsigned char)va_arg(*args, int);
+	write(1, &output, 1);
 	return (1);
 }
 
 int			spec_string(va_list *args, const int flags[5])
 {
 	char	*output;
-	int		len;
 
-	len = 6;
 	output = va_arg(*args, char*);
-	if (output != NULL)
-		len = ft_strlen(output);
-	else
-		output = "(null)";
-	ft_putstr("Here code\n");
-	ft_putstr(output);
+	output == NULL ? ft_putstr("(null)") : ft_putstr(output);
 	return (1);
 }
 
-int			spec_pointer(va_list *args, const int flags[5])
+int			spec_pointer(va_list *args, int flags[5])
 {
 	void			*output;
 	unsigned long	address;
 	int				len;
+    int width;
 
-	len = 0;
 	output = va_arg(*args, void*);
 	address = (unsigned long)(output);
-	ft_putstr("0x");
-	ft_putadr(address, &len);
+    flags[4] = 'x';
+    flags[0] |= F_H;
+    flags[0] |= F_S;
+    len = ft_uint_length(address, flags, 16);
+    flags[1] > len ? (width = flags[1]) : (width = len);
+    flags[2] > width ? (width = flags[2]) : 0;
+
+    ft_align_uint(address, flags, width, len);
 	return (1);
 }
 
@@ -55,28 +54,4 @@ int			spec_per(void)
 {
 	ft_putchar('%');
 	return (1);
-}
-
-void		ft_putadr(unsigned long n, int *p)
-{
-    if (n > 15)
-    {
-        ft_putadr((n / 16), p);
-        ft_putadr((n % 16), p);
-    }
-    else if (n < 10)
-    {
-        (*p)++;
-        ft_putchar((char)(n + '0'));
-    }
-    else
-    {
-        (*p)++;
-        n == 10 ? ft_putchar('a') : 0;
-        n == 11 ? ft_putchar('b') : 0;
-        n == 12 ? ft_putchar('c') : 0;
-        n == 13 ? ft_putchar('d') : 0;
-        n == 14 ? ft_putchar('e') : 0;
-        n == 15 ? ft_putchar('f') : 0;
-    }
 }

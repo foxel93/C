@@ -1,6 +1,6 @@
 #include "printf.h"
 
-static void    ft_print_flag(double output, const int flags[5])
+static void    ft_print_flag(long double output, const int flags[5])
 {
     if ((output * ft_pow(10, flags[2])) < 0 || output == -0.0)
         ft_putchar('-');
@@ -10,7 +10,7 @@ static void    ft_print_flag(double output, const int flags[5])
         ft_putchar(' ');
 }
 
-void    ft_align_double_left(double output, const int *flags, int part, char *str)
+void    ft_align_double_left(long double output, const int *flags, int part, char *str)
 {
     ft_print_flag(output, flags);
     ft_putstr(str);
@@ -22,7 +22,7 @@ void    ft_align_double_left(double output, const int *flags, int part, char *st
     }
 }
 
-void    ft_align_double_right(double output, const int *flags, int part, char *str)
+void    ft_align_double_right(long double output, const int *flags, int part, char *str)
 {
     if ((flags[0] & F_Z) == F_Z)
         ft_print_flag(output, flags);
@@ -39,7 +39,7 @@ void    ft_align_double_right(double output, const int *flags, int part, char *s
     free(str);
 }
 
-void 	ft_align_double(double output, const int *flags, int part, char *str)
+void 	ft_align_double(long double output, const int *flags, int part, char *str)
 {
     if ((int)(output) == 0)
         part--;

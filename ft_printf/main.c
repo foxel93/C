@@ -17,8 +17,10 @@ int		main(void)
 	int c;
 
 	c = INT_MIN;
-	//ft_printf("%0.9f\n",-1.7);
-    printf("%010.5F bleat\n",0.0/0.0);
+	char *dec = "ser";
+	char *pec = dec;
+	//ft_printf("%-10.9f help\n",0.0/0.0);
+    printf("bleat %#9.12p new\n",pec);
     //printf("%-+15.5hhd\n",100);
 	return (0);
 }

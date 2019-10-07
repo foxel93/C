@@ -35,7 +35,7 @@ void	ft_putnbr_sign(long long n, int len, int len2)
 		ft_putchar(n + '0');
 }
 
-void printBits(size_t const size, void const * const ptr, char sep)
+int printBits(size_t const size, void const * const ptr, char sep)
 {
     unsigned char *b;
     unsigned char byte;
@@ -52,7 +52,7 @@ void printBits(size_t const size, void const * const ptr, char sep)
             byte = (b[i] >> j) & 1;
             ft_putchar((char)(byte + '0'));
         }
-        i != 0 ? ft_putchar(sep) : 0;
+        i != 0 && sep ? ft_putchar(sep) : 0;
     }
 }
 

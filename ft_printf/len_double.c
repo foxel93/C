@@ -1,6 +1,6 @@
 #include "printf.h"
 
-int ft_double_length(double num, int flags[5])
+int ft_double_length(long double num, int flags[5])
 {
     int len;
     long long left;
@@ -13,6 +13,8 @@ int ft_double_length(double num, int flags[5])
         len = 1;
     else if (num == 0.0)
         len = 1;
+    if((flags[0] & F_H) == F_H && flags[2] == 0)
+        len++;
     while (left != 0)
     {
         left /= 10;

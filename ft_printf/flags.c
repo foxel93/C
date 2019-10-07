@@ -99,6 +99,8 @@ int			parse_specificators(const char **str)
 	**str == 'd' || **str == 'i' ? spec = 'd' : 0;
 	**str == 'u' ? spec = 'u' : 0;
 	**str == 'o' ? spec = 'o' : 0;
+    **str == 'b' ? spec = 'b' : 0;
+    **str == 'B' ? spec = 'B' : 0;
 	**str == 's' ? spec = 's' : 0;
 	**str == 'x' ? spec = 'x' : 0;
 	**str == 'X' ? spec = 'X' : 0;
@@ -107,11 +109,5 @@ int			parse_specificators(const char **str)
 	**str == '%' ? spec = '%' : 0;
 	**str == 'f' ? spec = 'f' : 0;
 	**str == 'F' ? spec = 'F' : 0;
-	**str == 'e' ? spec = 'e' : 0;
-	**str == 'E' ? spec = 'E' : 0;
-	**str == 'g' ? spec = 'g' : 0;
-	**str == 'G' ? spec = 'G' : 0;
-	**str == 'a' ? spec = 'a' : 0;
-	**str == 'A' ? spec = 'A' : 0;
 	return (spec);
 }
