@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "sudo ~/.ssh/authorized_keys"

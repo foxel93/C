@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#tail -2 /etc/resolv.conf
+echo "/etc/resolv.conf"

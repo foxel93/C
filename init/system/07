@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ps -e | grep "sshd" | cut -f 1 -d " "

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+df -l | cut -f 1 -d " " | grep "/"

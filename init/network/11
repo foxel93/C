@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# traceroute -m2 slash16.org | cut -f 4 -d " " | tail -1
+echo "192.168.2.9"

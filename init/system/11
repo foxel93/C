@@ -1,0 +1,3 @@
+#!/bin/sh
+
+df -h --total | tail -1 | awk '{print $4}'

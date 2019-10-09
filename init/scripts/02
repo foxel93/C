@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "Введите пользователя, которого хотите удалить"
+read user
+
+check=`cat /etc/passwd | awk -F':' '{print $1}' | grep "$user"`
+
+if [ "$check" != "$NULL" ]; then
+	sudo passwd -l $user
+	if [ "$(pgrep - u $user)" != "$NULL" ]; then
+		sudo kill $(pgrep - u $user)
+	fi
+	sudo userdel -r $user
+fi

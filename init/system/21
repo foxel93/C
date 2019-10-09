@@ -1,0 +1,3 @@
+#!/bin/sh
+
+getent passwd {1000..65536} | grep -v "nobody"

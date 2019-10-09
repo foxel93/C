@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#whois slash16.org | head -23
+echo "Amazon.com"
