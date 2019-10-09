@@ -6,15 +6,15 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 11:02:13 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/06 13:48:08 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/09 20:01:58 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../includes/printf.h"
 
-int			parse_width(const char **str, va_list *arg)
+int	parse_width(const char **str, va_list *arg)
 {
-	long	a;
+	long a;
 
 	a = 0;
 	if (**str == '*')
@@ -31,10 +31,10 @@ int			parse_width(const char **str, va_list *arg)
 	}
 	if (a > INT_MAX)
 		return (0);
-	return ((int)a);
+	return ((int) a);
 }
 
-int			parse_precision(const char **str, va_list *arg)
+int parse_precision(const char **str, va_list *arg)
 {
 	if (**str == '.')
 	{
@@ -44,20 +44,20 @@ int			parse_precision(const char **str, va_list *arg)
 	return (-2);
 }
 
-int			parse_modificators(const char **str)
+int parse_modificators(const char **str)
 {
-	int		mod;
+	int mod;
 
 	mod = 0;
 	if (**str == 'h' && *((*str) + 1) == 'h')
 	{
 		(*str)++;
-		return ((int)'h' + (int)'h');
+		return ((int) 'h' + (int) 'h');
 	}
 	if (**str == 'l' && *((*str) + 1) == 'l')
 	{
 		(*str)++;
-		return ((int)'l' + (int)'l');
+		return ((int) 'l' + (int) 'l');
 	}
 	**str == 'h' ? mod = 'h' : 0;
 	**str == 'l' ? mod = 'l' : 0;
@@ -69,9 +69,9 @@ int			parse_modificators(const char **str)
 	return (mod);
 }
 
-int			parse_flags(const char **str)
+int parse_flags(const char **str)
 {
-	int		flag;
+	int flag;
 
 	flag = 0;
 	while (*(++(*str)))
@@ -82,7 +82,7 @@ int			parse_flags(const char **str)
 		**str == ' ' ? flag |= F_S : 0;
 		**str == '+' ? flag |= F_P : 0;
 		if (!ft_strchr("#0- +", **str))
-			break ;
+			break;
 	}
 	if (flag && (flag | F_M) == F_M && (flag | F_Z) == F_Z)
 		flag -= F_Z;
@@ -91,16 +91,16 @@ int			parse_flags(const char **str)
 	return (flag);
 }
 
-int			parse_specificators(const char **str)
+int parse_specificators(const char **str)
 {
-	int		spec;
+	int spec;
 
 	spec = 0;
 	**str == 'd' || **str == 'i' ? spec = 'd' : 0;
 	**str == 'u' ? spec = 'u' : 0;
 	**str == 'o' ? spec = 'o' : 0;
-    **str == 'b' ? spec = 'b' : 0;
-    **str == 'B' ? spec = 'B' : 0;
+	**str == 'b' ? spec = 'b' : 0;
+	**str == 'B' ? spec = 'B' : 0;
 	**str == 's' ? spec = 's' : 0;
 	**str == 'x' ? spec = 'x' : 0;
 	**str == 'X' ? spec = 'X' : 0;
