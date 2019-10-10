@@ -6,21 +6,29 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 11:02:13 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/09 20:01:58 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/10 18:21:23 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-int	parse_width(const char **str, va_list *arg)
+int	parse_width(const char **str, va_list *arg, int *flags)
 {
 	long a;
+	long b;
 
 	a = 0;
 	if (**str == '*')
 	{
 		(*str)++;
-		return (va_arg(*arg, int));
+		b = va_arg(*arg, int);
+		if (b < 0)
+		{
+			flags[0] |= F_M;
+			return ((int)(-b));
+		}
+		else
+			return ((int)b);
 	}
 	if (!ft_isdigit(**str))
 		return (-1);
@@ -36,10 +44,34 @@ int	parse_width(const char **str, va_list *arg)
 
 int parse_precision(const char **str, va_list *arg)
 {
+	long b;
+	long a;
+
 	if (**str == '.')
 	{
 		(*str)++;
-		return (parse_width(str, arg));
+		a = 0;
+		if (**str == '*')
+		{
+			(*str)++;
+			b = va_arg(*arg, int);
+			if (b < 0)
+			{
+				return (-2);
+			}
+			else
+				return ((int)b);
+		}
+		if (!ft_isdigit(**str))
+			return (-1);
+		while (ft_isdigit(**str) && a < INT_MAX)
+		{
+			a = a * 10 + (**str - '0');
+			(*str)++;
+		}
+		if (a > INT_MAX)
+			return (0);
+		return ((int) a);
 	}
 	return (-2);
 }

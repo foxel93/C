@@ -16,7 +16,7 @@ void ft_putnbr_unsign(unsigned long long n, int *flags, int base, size_t *p)
 	base == 32 && (base = 16) ? a = 2 : (a = 1);
 	if (flags[7] > -1)
 	{
-		base == 8 ? flags[7]-- : 0;
+		(base == 8 && (flags[0] & F_H)) ? flags[7]-- : 0;
 		base == 16 ? flags[7] -= 2 : 0;
 		while (flags[6]++ < flags[7])
 			ft_putchar_index('0', p, flags[9]);

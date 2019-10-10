@@ -1,13 +1,27 @@
 #include "../includes/printf.h"
 
-static void ft_print_flag(long long output, int *flags, size_t *p)
+static int ft_print_flag(long long output, int *flags, size_t *p)
 {
+	int a;
+
+	a = 0;
 	if (output < 0)
+	{
 		ft_putchar_index('-', p, flags[9]);
+		a++;
+	}
 	else if ((flags[0] & F_P) == F_P)
+	{
 		ft_putchar_index('+', p, flags[9]);
+		a++;
+	}
 	else if ((flags[0] & F_S) == F_S)
+	{
 		ft_putchar_index(' ', p, flags[9]);
+		a++;
+	}
+	return (a);
+
 }
 
 void ft_align_int_left(long long output, int *flags, int len, size_t *p)
@@ -59,7 +73,8 @@ void ft_align_int(long long output, int *flags, int len, size_t *p)
 			flags[5] = 0;
 		while (flags[5]--)
 			ft_putchar_index(' ', p, flags[9]);
-	} else if ((flags[0] & F_M) == F_M)
+	}
+	else if ((flags[0] & F_M) == F_M)
 		ft_align_int_left(output, flags, len, p);
 	else
 		ft_align_int_right(output, flags, len, p);

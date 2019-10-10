@@ -6,7 +6,7 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 10:56:57 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/09 19:34:53 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/10 18:21:23 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 
 
-int			parse_width(const char **str, va_list *arg);
+int			parse_width(const char **str, va_list *arg, int *flags);
 int			parse_precision(const char **str, va_list *arg);
 int			parse_modificators(const char **str);
 int			parse_flags(const char **str);
@@ -49,14 +49,11 @@ int			spec_signed(va_list *args, int *flags, size_t *p);
 int			spec_unsigned(va_list *args, int *flags, size_t *p);
 int			spec_double(va_list *args, int *flags, size_t *p);
 
-
 int			ft_int_length(ssize_t num, int *flags);
 int			ft_int_perc_len(ssize_t num, int *flags);
 
 int			ft_uint_length(size_t num, int *flags, int base);
 int			ft_uint_perc_len(size_t num, int *flags, int base);
-
-int			ft_double_length(long double num, int *flags);
 
 int			ft_print_bin(size_t const size, void const *const ptr, int *flags, size_t *p);
 long long	ft_pow(long long n, long pow);
@@ -65,7 +62,7 @@ int			ft_count(long long a);
 int			print_ldouble(va_list *args, int *flags, size_t *p);
 int 		print_double(va_list *args, int *flags, size_t *p);
 
-void 		ft_align_double(long double output, int *flags, char *str, size_t *p);
+void 		ft_align_double(long long left, long long right, int *flags, size_t *p);
 
 int			ft_isnan(long double num, int *flags, size_t *p);
 int 		ft_isplus_inf(long double num, int *flags, size_t *p);

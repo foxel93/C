@@ -70,7 +70,7 @@ int ft_int_perc_len(ssize_t num, int *flags)
 	flags[8] = 0;
 	if (num < 0 || (flags[0] & F_P) == F_P || (flags[0] & F_S) == F_S)
 		s = 1;
-	if (num == 0)
+	else if (num == 0)
 		len = 1;
 	while (num != 0)
 	{

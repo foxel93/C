@@ -6,7 +6,7 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 10:37:14 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/09 20:01:58 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/10 12:51:14 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int spec_unsigned(va_list *args, int *flags, size_t *p)
 
 int spec_double(va_list *args, int *flags, size_t *p)
 {
-	if (flags[3] == 'L' || flags[3] == 'l')
+	if (flags[3] == 'L')
 	{
 		return (print_ldouble(args, flags, p));
-	} else if (flags[3] == 0)
+	} else if (flags[3] == 0 || flags[3] == 'l')
 	{
 		return (print_double(args, flags, p));
 	}

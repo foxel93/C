@@ -7,17 +7,18 @@ static int ft_print_flag(int *flags, size_t *p, int output)
 	a = 0;
 	if ((flags[0] & F_H) == F_H)
 	{
-		if (flags[4] == 'o' && output != 0)
+		//&& !(output == 0 && (flags[2] == 0 || flags[2] == -1)))
+		if (flags[4] == 'o' && flags[2] != 0 && output != 0)
 		{
 			ft_putchar_index('0', p, flags[9]);
 			a = 1;
 		}
-		else if (flags[4] == 'x' && flags[2] != 0)
+		else if (flags[4] == 'x' && flags[2] != 0 && output != 0)
 		{
 			ft_putstr_index("0x", p, flags[9]);
 			a = 2;
 		}
-		else if (flags[4] == 'X' && flags[2] != 0)
+		else if (flags[4] == 'X' && flags[2] != 0 && output != 0)
 		{
 			ft_putstr_index("0X", p, flags[9]);
 			a = 2;
@@ -37,7 +38,6 @@ static void ft_align_uint_left(unsigned long long output, int *flags, int len, s
 	flags[4] == 'X' ? base = 32 : 0;
 	len2 = ft_uint_perc_len(output, flags, base);
 	flags[5] -= (len > len2) ? len : len2;
-	printf("%d\t%d\t%d\n",flags[5], len, len2);
 	ft_print_flag(flags, p, output);
 	flags[6] = len;
 	flags[7] = len2;
@@ -72,7 +72,7 @@ static void ft_align_uint_right(unsigned long long output, int *flags, int len, 
 	}
 	if (((flags[0] & F_Z) == F_Z && flags[2] >= -1) || (flags[0] & F_Z) != F_Z)
 		ft_print_flag(flags, p, output);
-	if (!(flags[2] == 0 && output == 0))
+	//if (!(flags[2] == 0 && output == 0))
 		ft_putnbr_unsign(output, flags, base, p);
 }
 
