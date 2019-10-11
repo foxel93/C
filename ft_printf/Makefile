@@ -6,81 +6,97 @@
 #    By: ialleen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 14:33:53 by ialleen           #+#    #+#              #
-#    Updated: 2019/10/09 20:01:58 by ialleen          ###   ########.fr        #
+#    Updated: 2019/10/11 17:29:17 by ialleen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		libftprintf.a
-LIBFT_A =	libft.a
+NAME:=	libftprintf.a
+FILES:= align_double	align_int		align_uint\
+        double          double_helper	flags\
+		int				len_int			parse\
+		pointer			printf			putnbr\
+		size_t			specificators	string\
+		uint			utilities\
 
-COMP =		gcc -Wall -Werror -Wextra $(PRINTF_H) $(LIBFT_H) -c -o
+# ----- Libft ------
+LFTDIR:=./libft
+# ==================
 
-PRINTF_H =	-I includes/
-LIBFT_H = 	-I srcs/libft/includes
+# ------------------
+COMPILER:=gcc
+LINKER:=ar rc
+SRCPATH:=srcs/
+HDRPATH:=includes/
+CCHPATH:=obj/
+IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)
+CFLAGS:=-Wall -Werror -Wextra $(IFLAGS)
+# ==================
 
-OBJ_DIR =	obj/
-SRC_DIR =	srcs/
-LIB_DIR =	libft/
+# ----- Colors -----
+BLACK:="\033[1;30m"
+RED:="\033[1;31m"
+GREEN:="\033[1;32m"
+CYAN:="\033[1;35m"
+PURPLE:="\033[1;36m"
+WHITE:="\033[1;37m"
+EOC:="\033[0;0m"
+# ==================
 
-CFILE =		align_double.c\
-            align_int.c\
-            align_uint.c\
-            csp.c\
-            double.c\
-            double_helper.c\
-            flags.c\
-            int.c\
-            len_double.c\
-            len_int.c\
-            parse.c\
-            printf.c\
-            size_t.c\
-            specificators.c\
-            uint.c\
-            utilities_int.c\
-            utilities_uint.c\
+# ------ Auto ------
+SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
+OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
+# ==================
+CCHF:=.cache_exists
 
-CFIND =		$(CFILE:%=$(SRC_DIR)%)
-
-OFILE =		$(CFILE:%.c=%.o)
-
-OBJ =		$(addprefix $(OBJ_DIR), $(OFILE))
-
-all: $(OBJ_DIR) $(NAME)
-
-$(OBJ_DIR):
-		@mkdir -p $(OBJ_DIR)
-		@echo Create: ft_printf Object directory
+all: $(NAME)
 
 $(NAME): $(OBJ)
-		@echo LIBFT START
-		@make -C $(LIB_DIR)
-		@echo Copying $(LIBFT_A) to root.
-		@cp $(LIB_DIR)$(LIBFT_A) .
-		@mv $(LIBFT_A) $(NAME)
-		@ar rc $(NAME) $(addprefix $(OBJ_DIR), $(OFILE))
-		@ranlib $(NAME)
-		@echo Merged: $(NAME) with $(LIBFT_A)
-		@echo FT_PRINTF COMPLETE
+	@cd $(LFTDIR) && $(MAKE)
+	@echo $(CYAN) " - Compiling $@" $(RED)
+	@$(LINKER) $(NAME) $(OBJ) $(LFTDIR)/$(CCHPATH)*.o $(LFTDIR)/$(CCHPATH)/*.o
+	@ranlib $(NAME)
+	@echo $(GREEN) " - OK" $(EOC)
 
-$(OBJ): $(CFIND)
-		@$(MAKE) $(OFILE)
+$(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
+	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
+	@$(COMPILER) $(CFLAGS) -c $< -o $@
 
-$(OFILE):
-		@echo Create: $(@:obj/%=%)
-		@$(COMP) $(OBJ_DIR)$@ $(SRC_DIR)$(@:%.o=%.c)
+%.c:
+	@echo $(RED)"Missing file : $@" $(EOC)
+
+$(CCHF):
+	@mkdir $(CCHPATH)
+	@touch $(CCHF)
 
 clean:
-		@/bin/rm -rf $(OBJ_DIR)
-		@make -C $(LIB_DIR) clean
-		@echo Cleaned ft_printf object files
+	@rm -rf $(CCHPATH)
+	@rm -f $(CCHF)
+	@cd $(LFTDIR) && $(MAKE) clean
+	@echo $(GREEN)Objects DELETED $(EOC)
 
 fclean: clean
-		@/bin/rm -f $(NAME)
-		@make -C $(LIB_DIR) fclean
-		@echo Cleaned $(NAME)
+	@rm -f $(NAME)
+	@rm -f test_me
+	@rm -rf test_me.dSYM/
+	@rm -rf a.out.dSYM/
+	@cd $(LFTDIR) && $(MAKE) fclean
+	@echo $(GREEN)$(NAME) DELETED $(EOC)
 
-re: fclean all
+re: fclean
+	@$(MAKE) all
 
-.PHONY: all clean flcean re	
+test: $(NAME)
+	@echo "Files :" $(FILES)
+	@$(COMPILER) -g -w $(CFLAGS) main.c $(SRC) $(LFLAGS) -o test_me
 
+debug: $(NAME)
+	@echo "Files :" $(FILES)
+	@$(COMPILER) -g $(IFLAGS) main.c $(SRC) $(LFLAGS)
+
+norm:
+	@echo $(RED)
+	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
+	@echo $(END)
+	@cd $(LFTDIR) && $(MAKE) norm
+
+.PHONY: all clean fclean re test norme

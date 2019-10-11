@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   align_uint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 15:31:06 by ialleen           #+#    #+#             */
+/*   Updated: 2019/10/11 16:26:27 by ialleen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/printf.h"
 
-static int ft_print_flag(int *flags, size_t *p, int output)
+static int	ft_print_flag(int *flags, size_t *p, int output)
 {
-	int a;
+	int		a;
 
 	a = 0;
 	if ((flags[0] & F_H) == F_H)
 	{
-		//&& !(output == 0 && (flags[2] == 0 || flags[2] == -1)))
 		if (flags[4] == 'o' && flags[2] != 0 && output != 0)
 		{
 			ft_putchar_index('0', p, flags[9]);
@@ -27,10 +38,11 @@ static int ft_print_flag(int *flags, size_t *p, int output)
 	return (a);
 }
 
-static void ft_align_uint_left(unsigned long long output, int *flags, int len, size_t *p)
+static void	ft_align_uint_left(unsigned long long output,
+			int *flags, int len, size_t *p)
 {
-	int len2;
-	int base;
+	int		len2;
+	int		base;
 
 	base = 10;
 	flags[4] == 'o' ? base = 8 : 0;
@@ -46,10 +58,11 @@ static void ft_align_uint_left(unsigned long long output, int *flags, int len, s
 		ft_putchar_index(' ', p, flags[9]);
 }
 
-static void ft_align_uint_right(unsigned long long output, int *flags, int len, size_t *p)
+static void	ft_align_uint_right(unsigned long long output,
+			int *flags, int len, size_t *p)
 {
-	int len2;
-	int base;
+	int		len2;
+	int		base;
 
 	base = 10;
 	flags[4] == 'o' ? base = 8 : 0;
@@ -72,12 +85,15 @@ static void ft_align_uint_right(unsigned long long output, int *flags, int len, 
 	}
 	if (((flags[0] & F_Z) == F_Z && flags[2] >= -1) || (flags[0] & F_Z) != F_Z)
 		ft_print_flag(flags, p, output);
-	//if (!(flags[2] == 0 && output == 0))
-		ft_putnbr_unsign(output, flags, base, p);
+	ft_putnbr_unsign(output, flags, base, p);
 }
 
-void ft_align_uint(unsigned long long output, int *flags, int len, size_t *p)
+void		ft_align_uint(unsigned long long output,
+			int *flags, int len, size_t *p)
 {
+	(flags[0] & F_H && flags[4] == 'o' && flags[2] > 0) ? len++ : 0;
+	flags[5] = (flags[1] > len) ? flags[1] : len;
+	flags[2] > flags[5] ? flags[5] = flags[2] : 0;
 	if ((flags[2] == -1 || flags[2] == 0) && output == 0)
 	{
 		if (flags[5] == 1)
@@ -90,4 +106,3 @@ void ft_align_uint(unsigned long long output, int *flags, int len, size_t *p)
 	else
 		ft_align_uint_right(output, flags, len, p);
 }
-

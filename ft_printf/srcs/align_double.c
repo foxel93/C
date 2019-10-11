@@ -1,24 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   align_double.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 15:26:24 by ialleen           #+#    #+#             */
+/*   Updated: 2019/10/11 16:26:03 by ialleen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/printf.h"
 
-static void	ft_putnbr_double(long long n, int *flags, size_t *p)
+static void		ft_printf_double(long long left, long long right,
+				int *flags, size_t *p)
 {
-	if (n >= 10)
-	{
-		ft_putnbr_double((n / 10ll), flags, p);
-		ft_putnbr_double((n % 10ll), flags, p);
-	}
-	else
-		ft_putchar_index(n + '0', p, flags[9]);
-}
-
-static void	ft_printf_double(long long left, long long right, int *flags, size_t *p)
-{
-	int r;
-	long long tmp;
+	int			r;
+	long long	tmp;
 
 	r = ft_count(right);
 	tmp = (left < 0) ? -left : left;
-
 	ft_putnbr_double(tmp, flags, p);
 	if ((flags[5] == 0 && flags[0] & F_H) || flags[5] != 0)
 	{
@@ -32,7 +33,7 @@ static void	ft_printf_double(long long left, long long right, int *flags, size_t
 	}
 }
 
-static int ft_print_flag(long long left, const int *flags, size_t *p)
+static int		ft_print_flag(long long left, const int *flags, size_t *p)
 {
 	if (left < 0)
 	{
@@ -52,13 +53,14 @@ static int ft_print_flag(long long left, const int *flags, size_t *p)
 	return (0);
 }
 
-static void ft_align_double_left(long long left, long long right, int *flags, size_t *p)
+static void		ft_align_double_left(long long left, long long right,
+				int *flags, size_t *p)
 {
-	int left_len;
-	int right_len;
-	int len_num;
-	int width;
-	char c;
+	int		left_len;
+	int		right_len;
+	int		len_num;
+	int		width;
+	char	c;
 
 	left_len = ft_count(left);
 	right_len = (flags[2] == -1) ? 0 : flags[2];
@@ -72,17 +74,16 @@ static void ft_align_double_left(long long left, long long right, int *flags, si
 	ft_printf_double(left, right, flags, p);
 	while (width-- > len_num)
 		ft_putchar_index(c, p, flags[9]);
-
 }
 
-
-static void ft_align_double_right(long long left, long long right, int *flags, size_t *p)
+static void		ft_align_double_right(long long left, long long right,
+				int *flags, size_t *p)
 {
-	int left_len;
-	int right_len;
-	int len_num;
-	int width;
-	char c;
+	int		left_len;
+	int		right_len;
+	int		len_num;
+	int		width;
+	char	c;
 
 	left_len = ft_count(left);
 	right_len = (flags[2] == -1) ? 0 : flags[2];
@@ -90,7 +91,6 @@ static void ft_align_double_right(long long left, long long right, int *flags, s
 	(left < 0 || flags[0] & F_P || flags[0] & F_S) ? len_num++ : 0;
 	((right_len == 0 && flags[0] & F_H) || right_len != 0) ? len_num++ : 0;
 	width = flags[1] > len_num ? flags[1] : len_num;
-
 	(flags[0] & F_Z) ? width -= ft_print_flag(left, flags, p) : 0;
 	c = (flags[0] & F_Z) ? '0' : ' ';
 	while (width-- > len_num)
@@ -100,11 +100,11 @@ static void ft_align_double_right(long long left, long long right, int *flags, s
 	ft_printf_double(left, right, flags, p);
 }
 
-void ft_align_double(long long left, long long right, int *flags, size_t *p)
+void			ft_align_double(long long left, long long right,
+				int *flags, size_t *p)
 {
 	if (flags[0] & F_M)
 		ft_align_double_left(left, right, flags, p);
 	else
 		ft_align_double_right(left, right, flags, p);
 }
-

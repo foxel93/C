@@ -1,16 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   double_helper.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 15:39:03 by ialleen           #+#    #+#             */
+/*   Updated: 2019/10/11 16:25:18 by ialleen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/printf.h"
 
-static void ft_align(int *flags, int len, size_t *p)
+static void	ft_align(int *flags, int len, size_t *p)
 {
 	while (len-- > 0)
-	{
 		ft_putchar_index(' ', p, flags[9]);
-	}
 }
 
-int ft_isnan(long double num, int *flags, size_t *p)
+int			ft_isnan(long double num, int *flags, size_t *p)
 {
-	int width;
+	int		width;
 
 	if (num != num)
 	{
@@ -28,9 +38,9 @@ int ft_isnan(long double num, int *flags, size_t *p)
 	return (1);
 }
 
-int ft_isplus_inf(long double num, int *flags, size_t *p)
+int			ft_isplus_inf(long double num, int *flags, size_t *p)
 {
-	int width;
+	int		width;
 
 	if (num == 1.0 / 0.0)
 	{
@@ -48,9 +58,9 @@ int ft_isplus_inf(long double num, int *flags, size_t *p)
 	return (1);
 }
 
-int ft_isminus_inf(long double num, int *flags, size_t *p)
+int			ft_isminus_inf(long double num, int *flags, size_t *p)
 {
-	int width;
+	int		width;
 
 	if (num == -1.0 / 0.0)
 	{

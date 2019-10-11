@@ -6,16 +6,16 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 11:02:13 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/10 18:21:23 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/11 15:45:09 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-int	parse_width(const char **str, va_list *arg, int *flags)
+int			parse_width(const char **str, va_list *arg, int *flags)
 {
-	long a;
-	long b;
+	long	a;
+	long	b;
 
 	a = 0;
 	if (**str == '*')
@@ -33,19 +33,16 @@ int	parse_width(const char **str, va_list *arg, int *flags)
 	if (!ft_isdigit(**str))
 		return (-1);
 	while (ft_isdigit(**str) && a < INT_MAX)
-	{
-		a = a * 10 + (**str - '0');
-		(*str)++;
-	}
+		a = a * 10 + (*((*str)++) - '0');
 	if (a > INT_MAX)
 		return (0);
-	return ((int) a);
+	return ((int)a);
 }
 
-int parse_precision(const char **str, va_list *arg)
+int			parse_precision(const char **str, va_list *arg)
 {
-	long b;
-	long a;
+	long	b;
+	long	a;
 
 	if (**str == '.')
 	{
@@ -56,40 +53,35 @@ int parse_precision(const char **str, va_list *arg)
 			(*str)++;
 			b = va_arg(*arg, int);
 			if (b < 0)
-			{
 				return (-2);
-			}
 			else
 				return ((int)b);
 		}
 		if (!ft_isdigit(**str))
 			return (-1);
 		while (ft_isdigit(**str) && a < INT_MAX)
-		{
-			a = a * 10 + (**str - '0');
-			(*str)++;
-		}
+			a = a * 10 + (*((*str)++) - '0');
 		if (a > INT_MAX)
 			return (0);
-		return ((int) a);
+		return ((int)a);
 	}
 	return (-2);
 }
 
-int parse_modificators(const char **str)
+int			parse_modificators(const char **str)
 {
-	int mod;
+	int		mod;
 
 	mod = 0;
 	if (**str == 'h' && *((*str) + 1) == 'h')
 	{
 		(*str)++;
-		return ((int) 'h' + (int) 'h');
+		return ((int)'h' + (int)'h');
 	}
 	if (**str == 'l' && *((*str) + 1) == 'l')
 	{
 		(*str)++;
-		return ((int) 'l' + (int) 'l');
+		return ((int)'l' + (int)'l');
 	}
 	**str == 'h' ? mod = 'h' : 0;
 	**str == 'l' ? mod = 'l' : 0;
@@ -101,9 +93,9 @@ int parse_modificators(const char **str)
 	return (mod);
 }
 
-int parse_flags(const char **str)
+int			parse_flags(const char **str)
 {
-	int flag;
+	int		flag;
 
 	flag = 0;
 	while (*(++(*str)))
@@ -114,18 +106,16 @@ int parse_flags(const char **str)
 		**str == ' ' ? flag |= F_S : 0;
 		**str == '+' ? flag |= F_P : 0;
 		if (!ft_strchr("#0- +", **str))
-			break;
+			break ;
 	}
-	if (flag && (flag | F_M) == F_M && (flag | F_Z) == F_Z)
-		flag -= F_Z;
-	if (flag && (flag | F_P) == F_P && (flag | F_S) == F_S)
-		flag -= F_S;
+	(flag && (flag & F_M) && (flag & F_Z)) ? flag -= F_Z : 0;
+	(flag && (flag & F_P) && (flag & F_S)) ? flag -= F_S : 0;
 	return (flag);
 }
 
-int parse_specificators(const char **str)
+int			parse_specificators(const char **str)
 {
-	int spec;
+	int		spec;
 
 	spec = 0;
 	**str == 'd' || **str == 'i' ? spec = 'd' : 0;

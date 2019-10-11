@@ -6,7 +6,7 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 20:05:40 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/06 11:00:09 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/11 16:27:13 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_putnstr(char *str, size_t n);
+int					ft_putstr_index(char *str, size_t *p, int fd);
+int					ft_putchar_index(char c, size_t *p, int fd);
+long long			ft_pow(long long n, long pow);
+int					ft_count(long long a);
 
 typedef struct		s_list
 {

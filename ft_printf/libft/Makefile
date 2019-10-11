@@ -6,59 +6,87 @@
 #    By: ialleen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/12 10:26:24 by ialleen           #+#    #+#              #
-#    Updated: 2019/09/08 12:48:17 by ialleen          ###   ########.fr        #
+#    Updated: 2019/10/11 17:26:24 by ialleen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
-SRCSFILES = ft_atoi.c		ft_bzero.c		ft_calloc.c		ft_isalnum.c	ft_isalpha.c\
-			ft_isascii.c	ft_lstdel.c		ft_isdigit.c	ft_isprint.c	ft_itoa.c\
-			ft_lstadd.c		ft_lstdelone.c	ft_lstiter.c	ft_lstmap.c		ft_lstnew.c\
-			ft_memalloc.c	ft_memccpy.c	ft_memchr.c		ft_memcmp.c		ft_memcpy.c\
-			ft_memdel.c		ft_memmove.c	ft_memset.c		ft_putchar.c	ft_putchar_fd.c\
-			ft_putendl.c	ft_putendl_fd.c	ft_putnbr.c		ft_putnbr_fd.c	ft_putstr.c\
-			ft_putstr_fd.c	ft_realloc.c	ft_strcat.c		ft_strchr.c		ft_strclr.c\
-			ft_strcmp.c		ft_strcpy.c		ft_strcspn.c	ft_strdel.c		ft_strdup.c\
-			ft_strequ.c		ft_striter.c	ft_striteri.c	ft_strjoin.c	ft_strlcat.c\
-			ft_strlen.c		ft_strmap.c		ft_strmapi.c	ft_strncat.c	ft_strncmp.c\
-			ft_strncpy.c	ft_strnequ.c	ft_strnew.c		ft_strnstr.c	ft_strrchr.c\
-			ft_strsplit.c	ft_strspn.c		ft_strstr.c		ft_strsub.c		ft_strtok.c\
-			ft_strtrim.c	ft_tolower.c	ft_toupper.c	ft_strlcmp.c	ft_strlcpy.c\
-			ft_strpbrk.c	ft_isblank.c	ft_iscntrl.c	ft_isgraph.c	ft_islower.c\
-			ft_ispunct.c	ft_isspace.c	ft_isupper.c	ft_isxdigit.c	ft_strndup.c\
-			get_next_line.c ft_putnstr.c
-SRCSDIR = ./
-SRCS = $(addprefix $(SRCSDIR), $(SRCSFILES))
-OBJS = $(SRCS:.c=.o)
-	HEADERS = libft.h
-	HEADERFLAGS = $(addprefix -I, $(dir $(HEADERS)))
+NAME:= libft.a
 
-SRCTEST = main_.c 
-OBJTEST = $(SRCTEST:.c=.o)
+FILES:= 	ft_atoi			ft_bzero		ft_calloc	ft_isalnum		ft_isalpha\
+			ft_isascii		ft_lstdel		ft_isdigit	ft_isprint		ft_itoa\
+			ft_lstadd		ft_lstdelone	ft_lstiter	ft_lstmap		ft_lstnew\
+			ft_memalloc		ft_memccpy		ft_memchr	ft_memcmp		ft_memcpy\
+			ft_memdel		ft_memmove		ft_memset	ft_putchar		ft_putchar_fd\
+			ft_putendl		ft_putendl_fd	ft_putnbr	ft_putnbr_fd	ft_putstr\
+			ft_putstr_fd	ft_realloc		ft_strcat	ft_strchr		ft_strclr\
+			ft_strcmp		ft_strcpy		ft_strcspn	ft_strdel		ft_strdup\
+			ft_strequ		ft_striter		ft_striteri	ft_strjoin		ft_strlcat\
+			ft_strlen		ft_strmap		ft_strmapi	ft_strncat		ft_strncmp\
+			ft_strncpy		ft_strnequ		ft_strnew	ft_strnstr		ft_strrchr\
+			ft_strsplit		ft_strspn		ft_strstr	ft_strsub		ft_strtok\
+			ft_strtrim		ft_tolower		ft_toupper	ft_strlcmp		ft_strlcpy\
+			ft_strpbrk		ft_isblank		ft_iscntrl	ft_isgraph		ft_islower\
+			ft_ispunct		ft_isspace		ft_isupper	ft_isxdigit		ft_strndup\
+			get_next_line	ft_putnstr		ft_count	ft_pow			ft_putchar_index\
+			ft_putstr_index
 
+# ==== Standard ====
+CC:=gcc
+CCHPATH:=obj/
+SRCPATH:= ./
+HDRPATH:= ./
+CFLAGS:=-Wall -Wextra -Werror -I $(HDRPATH)
+# ==================
+
+# ===== Colors =====
+END:="\033[0;0m"
+BLACK:="\033[1;30m"
+RED:="\033[1;31m"
+GREEN:="\033[1;32m"
+CYAN:="\033[1;35m"
+PURPLE:="\033[1;36m"
+WHITE:="\033[1;37m"
+# ==================
+
+# ==== Src & Obj ===
+SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
+OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
+# ==================
+CCHF:=.cache_exists
 
 all: $(NAME)
-		
-$(NAME): $(OBJS)
-		@ar rc $(NAME) $(OBJS)
-		@echo "----------------\nar rc $(NAME)"
-		@ranlib $(NAME)
-		@echo "----------------\nranlib $(NAME)"
 
-%.o: %.c $(HEADERS)
-		@$(CC) $(CFLAGS) -I $(HEADERFLAGS) -c -o $@ $<
-		@echo "gcc $<"
+$(NAME): $(OBJ)
+	@echo $(END)
+	@echo $(CYAN) " - Compiling $@" $(RED)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo $(GREEN) " - Done" $(END)
+
+$(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
+	@echo ".\c"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+%.c:
+	@echo $(RED) "Missing file : $@"
+
+$(CCHF):
+	@mkdir $(CCHPATH)
+	@touch $(CCHF)
+
 clean:
-		@/bin/rm -f $(OBJS)
-		@/bin/rm -rf a.out.dSYM
-		@echo "----------------\nobjects delete"
+	@rm -rf $(CCHPATH)
+	@rm -f $(CCHF)
 
 fclean: clean
-		@/bin/rm -f $(NAME)
-		@echo "----------------\n$(NAME) delete"
+	@rm -f $(NAME)
 
-re: fclean all
+re: fclean
+	@$(MAKE) all
 
-.PHONY: all clean fclean re
+norm:
+	@echo $(RED)
+	@norminette $(SRC) $(HDRPATH) | grep -v Norme -B1 || true
+	@echo $(END)
+
+.PHONY: all clean fclean re test norme

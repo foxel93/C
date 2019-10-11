@@ -6,17 +6,17 @@
 /*   By: ialleen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 10:37:14 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/10 12:51:14 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/11 16:18:33 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-int spec_signed(va_list *args, int *flags, size_t *p)
+int		spec_signed(va_list *args, int *flags, size_t *p)
 {
-	if (flags[3] == (int) ('h') + (int) ('h'))
+	if (flags[3] == (int)'h' + (int)'h')
 		return (print_hhd(args, flags, p));
-	else if (flags[3] == (int) ('l') + (int) ('l'))
+	else if (flags[3] == (int)'l' + (int)'l')
 		return (print_lld(args, flags, p));
 	else if (flags[3] == 'h')
 		return (print_hd(args, flags, p));
@@ -29,11 +29,11 @@ int spec_signed(va_list *args, int *flags, size_t *p)
 	return (0);
 }
 
-int spec_unsigned(va_list *args, int *flags, size_t *p)
+int		spec_unsigned(va_list *args, int *flags, size_t *p)
 {
-	if (flags[3] == (int) ('h') + (int) ('h'))
+	if (flags[3] == (int)'h' + (int)'h')
 		return (print_hhu(args, flags, p));
-	else if (flags[3] == (int) ('l') + (int) ('l'))
+	else if (flags[3] == (int)'l' + (int)'l')
 		return (print_llu(args, flags, p));
 	else if (flags[3] == 'h')
 		return (print_hu(args, flags, p));
@@ -46,12 +46,13 @@ int spec_unsigned(va_list *args, int *flags, size_t *p)
 	return (0);
 }
 
-int spec_double(va_list *args, int *flags, size_t *p)
+int		spec_double(va_list *args, int *flags, size_t *p)
 {
 	if (flags[3] == 'L')
 	{
 		return (print_ldouble(args, flags, p));
-	} else if (flags[3] == 0 || flags[3] == 'l')
+	}
+	else if (flags[3] == 0 || flags[3] == 'l')
 	{
 		return (print_double(args, flags, p));
 	}

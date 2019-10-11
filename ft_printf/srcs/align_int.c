@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   align_int.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 15:29:35 by ialleen           #+#    #+#             */
+/*   Updated: 2019/10/11 16:26:16 by ialleen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/printf.h"
 
-static int ft_print_flag(long long output, int *flags, size_t *p)
+static int	ft_print_flag(long long output, int *flags, size_t *p)
 {
-	int a;
+	int		a;
 
 	a = 0;
 	if (output < 0)
@@ -21,12 +33,11 @@ static int ft_print_flag(long long output, int *flags, size_t *p)
 		a++;
 	}
 	return (a);
-
 }
 
-void ft_align_int_left(long long output, int *flags, int len, size_t *p)
+static void	ft_align_int_left(long long output, int *flags, int len, size_t *p)
 {
-	int len2;
+	int		len2;
 
 	len2 = ft_int_perc_len(output, flags);
 	flags[5] -= (len > len2) ? len : len2;
@@ -41,9 +52,9 @@ void ft_align_int_left(long long output, int *flags, int len, size_t *p)
 	}
 }
 
-void ft_align_int_right(long long output, int *flags, int len, size_t *p)
+static void	ft_align_int_right(long long output, int *flags, int len, size_t *p)
 {
-	int len2;
+	int		len2;
 
 	len2 = ft_int_perc_len(output, flags);
 	flags[5] -= (len > len2) ? len : len2;
@@ -65,7 +76,7 @@ void ft_align_int_right(long long output, int *flags, int len, size_t *p)
 	ft_putnbr_sign(output, flags, p);
 }
 
-void ft_align_int(long long output, int *flags, int len, size_t *p)
+void		ft_align_int(long long output, int *flags, int len, size_t *p)
 {
 	if ((flags[2] == -1 || flags[2] == 0) && output == 0)
 	{

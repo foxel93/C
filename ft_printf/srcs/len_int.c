@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   len_int.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 15:48:27 by ialleen           #+#    #+#             */
+/*   Updated: 2019/10/11 15:49:07 by ialleen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/printf.h"
 
-int ft_int_length(ssize_t num, int *flags)
+int		ft_int_length(ssize_t num, int *flags)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	flags[8] = 0;
@@ -18,9 +30,9 @@ int ft_int_length(ssize_t num, int *flags)
 	return (len);
 }
 
-int ft_uint_length(size_t num, int *flags, int base)
+int		ft_uint_length(size_t num, int *flags, int base)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	flags[8] = 0;
@@ -35,10 +47,10 @@ int ft_uint_length(size_t num, int *flags, int base)
 	return (len);
 }
 
-int ft_uint_perc_len(size_t num, int *flags, int base)
+int		ft_uint_perc_len(size_t num, int *flags, int base)
 {
-	int len;
-	int s;
+	int	len;
+	int	s;
 
 	s = 0;
 	len = 0;
@@ -60,10 +72,10 @@ int ft_uint_perc_len(size_t num, int *flags, int base)
 	return (len + s);
 }
 
-int ft_int_perc_len(ssize_t num, int *flags)
+int		ft_int_perc_len(ssize_t num, int *flags)
 {
-	int len;
-	int s;
+	int	len;
+	int	s;
 
 	len = 0;
 	s = 0;
