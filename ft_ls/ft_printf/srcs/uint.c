@@ -6,7 +6,7 @@
 /*   By: ialleen <ialleen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 14:46:05 by ialleen           #+#    #+#             */
-/*   Updated: 2019/10/18 23:28:42 by ialleen          ###   ########.fr       */
+/*   Updated: 2019/10/11 15:23:49 by ialleen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			print_hhu(va_list *args, int *flags, size_t *p)
 	output = (unsigned char)va_arg(*args, void*);
 	l = (flags[2] == -1 || flags[2] == 0) && output == 0;
 	if (flags[4] == 'b' || flags[4] == 'B')
-		return (ft_print_bin(sizeof(output), &output, flags, p));
+		return (ft_print_bin(sizeof(output), &output, 0, p));
 	if ((ft_strchr("o", flags[4]) && l && !(flags[0] & F_H))
 		|| (ft_strchr("xXu", flags[4]) && l))
 	{
