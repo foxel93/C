@@ -3,11 +3,8 @@
 int 	checker(int argc, char **argv)
 {
 	if (argc == 1)
-	{
-		ft_putstr("Usage: check [-v] [-t] [-s <partial SDK name>][-b <bundle identifier>] [-a <application>] [filenames] [--args arguments]\n");
-		ft_putstr("Options:\n");
-		ft_putstr("\t\t-a\t\t\tOpens with the specified application.\n");
-		return (0);
-	}
+		ft_error(1);
+	else if (argc - 1 != count_numbers(argc, argv))
+		ft_error(0);
 	return (0);
 }

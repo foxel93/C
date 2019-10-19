@@ -1,11 +1,11 @@
 #include "../includes/ft_deque.h"
 
-void deque_push_back(t_deque *d, t_val v)
+int deque_push_back(t_deque *d, t_val v)
 {
 	t_deque *n;
 
 	if (!(n = malloc(sizeof(t_deque))))
-		return ;
+		return (0);
 	n->val = v;
 	n->prev = d->info->tail;
 	n->next = NULL;
@@ -15,14 +15,15 @@ void deque_push_back(t_deque *d, t_val v)
 		d->info->tail->next = n;
 	d->info->tail = n;
 	d->info->len++;
+	return (1);
 }
 
-void deque_push_front(t_deque *d, t_val v)
+int deque_push_front(t_deque *d, t_val v)
 {
 	t_deque *n;
 
 	if (!(n = malloc(sizeof(t_deque))))
-		return ;
+		return (0);
 	n->val = v;
 	n->prev = NULL;
 	n->next = d->info->head;
@@ -32,4 +33,5 @@ void deque_push_front(t_deque *d, t_val v)
 		d->info->head->prev = n;
 	d->info->head = n;
 	d->info->len++;
+	return (1);
 }

@@ -34,14 +34,14 @@ struct s_deque
 t_deque				*deque_alloc();
 void				deque_free(t_deque *d);
 int					deque_is_empty(t_deque *d);
-void				deque_push_front(t_deque *d, t_val v);
-void				deque_push_back(t_deque *d, t_val v);
+int					deque_push_front(t_deque *d, t_val v);
+int					deque_push_back(t_deque *d, t_val v);
 
-t_val	deque_pop_front(t_deque *d);
-t_val	deque_pop_back(t_deque *d);
+t_val				deque_pop_front(t_deque *d);
+t_val				deque_pop_back(t_deque *d);
 
-t_val	deque_peek_front(t_deque *d);
-t_val	deque_peek_back(t_deque *d);
-t_val	deque_peek_front_n(t_deque *d, int pos);
-t_val	deque_peek_back_n(t_deque *d, int pos);
+t_val				deque_peek_front(t_deque *d);
+t_val				deque_peek_back(t_deque *d);
+t_val				deque_peek_front_n(t_deque *d, int pos);
+t_val				deque_peek_back_n(t_deque *d, int pos);
 #endif

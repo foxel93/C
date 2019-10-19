@@ -1,44 +1,59 @@
-#include "push_swap.h"
+#include "../includes/push_swap.h"
+
+void	start(t_deque *a, t_deque *b, int count)
+{
+	t_deque *com;
+	t_val 	max;
+	t_val 	min;
+	int i;
+	t_val tmp;
+
+	min = INT_MAX;
+	max = INT_MIN;
+	i = 0;
+	while (i < count)
+	{
+		tmp = deque_peek_back_n(a, i + 1);
+		tmp > max ? max = tmp : 0;
+		tmp < min ? min = tmp : 0;
+		i++;
+	}
+	ft_printf("%d\t%d\n",min, max);
+	if (!(com =  deque_alloc())) {
+		deque_free(a);
+		deque_free(b);
+		ft_error(0);
+	}
+	//qs(a, b, com);
+	ft_print_stacks(a, b, count);
+	ft_print_commands(com);
+}
 
 int main(int argc, char **argv)
 {
+	int *n;
 	t_deque *a;
 	t_deque *b;
-	int	max;
+	int count;
+	int i;
 
-
-	if(!(a = deque_alloc()))
+	count = count_numbers(argc, argv);
+	n = all_numbers(argc, argv, count);
+	a = deque_alloc();
+	b = deque_alloc();
+	if (!a || !b)
+	{
+		b ? deque_free(b) : 0;
+		a ? deque_free(a) : 0;
+		free(n);
 		ft_error(0);
-	if(!(b = deque_alloc()))
-	{
-		deque_free(a);
-		ft_error(0);
 	}
-
-	for (int i = 1; i <= 512; i+=i)
-	{
-		deque_push_back(a, i);
-	}
-
-	for (int i = 1; i <= 64; i+=i)
-	{
-		deque_push_back(b, i);
-	}
-	swap_stack(a);
-	//deque_pop_front(a);
-	//deque_pop_front(a);
-	//deque_pop_back(a);
-	//deque_pop_back(a);
-	//ft_printf("%d\n",deque_peek_front_n(a, 10));
-
-	/*while (!deque_is_empty(a))
-	{
-		ft_printf("%d\t%d\n", deque_pop_back(a), a->info->len);
-		//ft_printf("%d\t%d\n", deque_pop_back(a), a->info->len);
-	}*/
-	max = max_len_deq(a,b);
-	ft_print_stacks(a,b,max);
+	i = 0;
+	while (i < count)
+		(deque_push_back(a, n[i])) ? i++ : 0;
+	free(n);
+	start(a, b, count);
 	deque_free(a);
 	deque_free(b);
-	return 0;
+	return (0);
 }
