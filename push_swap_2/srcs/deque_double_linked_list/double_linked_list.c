@@ -121,6 +121,7 @@ _Bool pop_front(t_dlst *dlst, t_val *value)
 	dlst->size--;
 	return (1);
 }
+
 t_node* change_nth_elem(t_dlst *dlst, size_t index, t_val val)
 {
 	t_node *tmp;
@@ -183,7 +184,8 @@ t_node* get_nth_elem(t_dlst *dlst, size_t index)
 	return (tmp);
 }
 
-_Bool insert(t_dlst *dlst, size_t index, t_val value) {
+_Bool insert(t_dlst *dlst, size_t index, t_val value)
+{
 	t_node *elm;
 	t_node *ins;
 
